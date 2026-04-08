@@ -1,0 +1,136 @@
+{
+  "title": "Crypto Pipeline — Medallion Architecture",
+  "uid": "crypto-medallion-v1",
+  "version": 1,
+  "schemaVersion": 38,
+  "refresh": "30s",
+  "time": { "from": "now-24h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "🥉 Bronze — Raw Rows",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT COUNT(*) AS value FROM bronze.crypto_ticker_raw", "format": "table", "refId": "A" }],
+      "options": { "colorMode": "background", "graphMode": "none" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "brown" } } }
+    },
+    {
+      "id": 2,
+      "title": "🥈 Silver — Clean Rows",
+      "type": "stat",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT COUNT(*) AS value FROM silver.crypto_ticker", "format": "table", "refId": "A" }],
+      "options": { "colorMode": "background", "graphMode": "none" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "silver" } } }
+    },
+    {
+      "id": 3,
+      "title": "🥇 Gold — Tracked Symbols",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT COUNT(*) AS value FROM gold.latest_prices", "format": "table", "refId": "A" }],
+      "options": { "colorMode": "background", "graphMode": "none" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "gold" } } }
+    },
+    {
+      "id": 4,
+      "title": "Last Gold Refresh",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT MAX(updated_at) AS value FROM gold.latest_prices", "format": "table", "refId": "A" }],
+      "options": { "colorMode": "background", "graphMode": "none" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "orange" }, "unit": "dateTimeFromNow" } }
+    },
+    {
+      "id": 5,
+      "title": "🥉→🥈 Bronze vs Silver Rows Over Time",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 8 },
+      "datasource": "CryptoDB",
+      "targets": [
+        {
+          "rawSql": "SELECT DATE_TRUNC('minute', ingested_at) AS time, COUNT(*) AS \"Bronze\" FROM bronze.crypto_ticker_raw WHERE ingested_at >= NOW() - INTERVAL '24 hours' GROUP BY 1 ORDER BY 1",
+          "format": "time_series", "refId": "A"
+        },
+        {
+          "rawSql": "SELECT DATE_TRUNC('minute', transformed_at) AS time, COUNT(*) AS \"Silver\" FROM silver.crypto_ticker WHERE transformed_at >= NOW() - INTERVAL '24 hours' GROUP BY 1 ORDER BY 1",
+          "format": "time_series", "refId": "B"
+        }
+      ],
+      "fieldConfig": { "defaults": { "custom": { "lineWidth": 2, "fillOpacity": 10 } } }
+    },
+    {
+      "id": 6,
+      "title": "🥇 Top 20 Gainers (24h %)",
+      "type": "bargauge",
+      "gridPos": { "x": 0, "y": 12, "w": 12, "h": 10 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT symbol, price_change_pct AS \"Change %\" FROM gold.top_gainers ORDER BY rank", "format": "table", "refId": "A" }],
+      "options": { "orientation": "horizontal", "displayMode": "gradient" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": { "steps": [{ "color": "yellow", "value": null }, { "color": "green", "value": 2 }] }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "🥇 Top 20 Losers (24h %)",
+      "type": "bargauge",
+      "gridPos": { "x": 12, "y": 12, "w": 12, "h": 10 },
+      "datasource": "CryptoDB",
+      "targets": [{ "rawSql": "SELECT symbol, price_change_pct AS \"Change %\" FROM gold.top_losers ORDER BY rank", "format": "table", "refId": "A" }],
+      "options": { "orientation": "horizontal", "displayMode": "gradient" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": { "steps": [{ "color": "red", "value": null }, { "color": "yellow", "value": -2 }] }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "🥇 Volume Leaders",
+      "type": "table",
+      "gridPos": { "x": 0, "y": 22, "w": 24, "h": 10 },
+      "datasource": "CryptoDB",
+      "targets": [{
+        "rawSql": "SELECT rank AS \"#\", symbol AS \"Symbol\", last_price AS \"Price\", quote_volume AS \"Quote Volume\", price_change_pct AS \"Change %\", trade_count AS \"Trades\", updated_at AS \"Updated\" FROM gold.volume_leaders ORDER BY rank",
+        "format": "table", "refId": "A"
+      }],
+      "fieldConfig": {
+        "defaults": { "custom": { "align": "auto" } },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Change %" },
+            "properties": [
+              { "id": "unit", "value": "percent" },
+              { "id": "custom.displayMode", "value": "color-background" },
+              { "id": "thresholds", "value": { "steps": [{ "color": "red", "value": null }, { "color": "yellow", "value": 0 }, { "color": "green", "value": 2 }] } }
+            ]
+          },
+          { "matcher": { "id": "byName", "options": "Price" }, "properties": [{ "id": "unit", "value": "currencyUSD" }] },
+          { "matcher": { "id": "byName", "options": "Quote Volume" }, "properties": [{ "id": "unit", "value": "currencyUSD" }] }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "title": "🥇 Hourly Summary — Top 10 by Volume",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 32, "w": 24, "h": 8 },
+      "datasource": "CryptoDB",
+      "targets": [{
+        "rawSql": "SELECT hour AS time, symbol, total_volume AS \"Volume\" FROM gold.hourly_summary WHERE symbol IN (SELECT symbol FROM gold.volume_leaders WHERE rank <= 10) AND hour >= NOW() - INTERVAL '24 hours' ORDER BY hour",
+        "format": "time_series", "refId": "A"
+      }],
+      "fieldConfig": { "defaults": { "custom": { "lineWidth": 2, "fillOpacity": 5 } } }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[2026-04-03T11:08:05.525+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509
+[2026-04-03T11:08:05.525+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health'
+[2026-04-03T11:08:05.548+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509
+[2026-04-03T11:08:05.548+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health'
+[2026-04-03T11:08:05.575+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_pipeline.update_pipeline_health scheduled__2026-04-03T11:00:00+00:00 [queued]>
+[2026-04-03T11:08:05.580+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_pipeline.update_pipeline_health scheduled__2026-04-03T11:00:00+00:00 [queued]>
+[2026-04-03T11:08:05.580+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-04-03T11:08:05.588+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): update_pipeline_health> on 2026-04-03 11:00:00+00:00
+[2026-04-03T11:08:05.591+0000] {standard_task_runner.py:60} INFO - Started process 213 to run task
+[2026-04-03T11:08:05.593+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'crypto_pipeline', 'update_pipeline_health', 'scheduled__2026-04-03T11:00:00+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpju6zoesk']
+[2026-04-03T11:08:05.595+0000] {standard_task_runner.py:88} INFO - Job 10: Subtask update_pipeline_health
+[2026-04-03T11:08:05.626+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509
+[2026-04-03T11:08:05.627+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T11:00:00+00:00/task_id=update_pipeline_health'
+[2026-04-03T11:08:05.635+0000] {task_command.py:423} INFO - Running <TaskInstance: crypto_pipeline.update_pipeline_health scheduled__2026-04-03T11:00:00+00:00 [running]> on host 16ceeaefc682
+[2026-04-03T11:08:05.686+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='crypto-pipeline' AIRFLOW_CTX_DAG_ID='crypto_pipeline' AIRFLOW_CTX_TASK_ID='update_pipeline_health' AIRFLOW_CTX_EXECUTION_DATE='2026-04-03T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-03T11:00:00+00:00'
+[2026-04-03T11:08:05.695+0000] {crypto_pipeline.py:315} INFO - 📊 Pipeline health snapshot written to gold.pipeline_health
+[2026-04-03T11:08:05.696+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-04-03T11:08:05.704+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=crypto_pipeline, task_id=update_pipeline_health, execution_date=20260403T110000, start_date=20260403T110805, end_date=20260403T110805
+[2026-04-03T11:08:05.727+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-04-03T11:08:05.747+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

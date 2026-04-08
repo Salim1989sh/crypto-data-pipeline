@@ -1,0 +1,19 @@
+apiVersion: 1
+
+datasources:
+  - name: CryptoDB
+    type: postgres
+    url: postgres:5432
+    database: crypto_db
+    user: crypto_user
+    secureJsonData:
+      password: crypto_pass
+    jsonData:
+      sslmode: disable
+      maxOpenConns: 10
+      maxIdleConns: 5
+      connMaxLifetime: 14400
+      postgresVersion: 1500
+      timescaledb: false
+    isDefault: true
+    editable: true

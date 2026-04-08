@@ -1,0 +1,41 @@
+[2026-04-03T11:00:02.924+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509
+[2026-04-03T11:00:02.924+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health'
+[2026-04-03T11:00:02.949+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509
+[2026-04-03T11:00:02.949+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health'
+[2026-04-03T11:00:02.975+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_pipeline.check_kafka_health scheduled__2026-04-03T10:55:00+00:00 [queued]>
+[2026-04-03T11:00:02.979+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_pipeline.check_kafka_health scheduled__2026-04-03T10:55:00+00:00 [queued]>
+[2026-04-03T11:00:02.979+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-04-03T11:00:02.986+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_kafka_health> on 2026-04-03 10:55:00+00:00
+[2026-04-03T11:00:02.989+0000] {standard_task_runner.py:60} INFO - Started process 198 to run task
+[2026-04-03T11:00:02.991+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'crypto_pipeline', 'check_kafka_health', 'scheduled__2026-04-03T10:55:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmprlbm76nb']
+[2026-04-03T11:00:02.992+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask check_kafka_health
+[2026-04-03T11:00:03.025+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509
+[2026-04-03T11:00:03.025+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T10:55:00+00:00/task_id=check_kafka_health'
+[2026-04-03T11:00:03.033+0000] {task_command.py:423} INFO - Running <TaskInstance: crypto_pipeline.check_kafka_health scheduled__2026-04-03T10:55:00+00:00 [running]> on host 5e459bbbac03
+[2026-04-03T11:00:03.080+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='crypto-pipeline' AIRFLOW_CTX_DAG_ID='crypto_pipeline' AIRFLOW_CTX_TASK_ID='check_kafka_health' AIRFLOW_CTX_EXECUTION_DATE='2026-04-03T10:55:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-03T10:55:00+00:00'
+[2026-04-03T11:00:09.611+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/crypto_pipeline.py", line 62, in check_kafka_health
+    sock = socket.create_connection(("kafka", 29092), timeout=5)
+  File "/usr/local/lib/python3.8/socket.py", line 787, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/crypto_pipeline.py", line 66, in check_kafka_health
+    raise RuntimeError(f"Kafka health check failed: {e}")
+RuntimeError: Kafka health check failed: [Errno -3] Temporary failure in name resolution
+[2026-04-03T11:00:09.623+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_pipeline, task_id=check_kafka_health, execution_date=20260403T105500, start_date=20260403T110002, end_date=20260403T110009
+[2026-04-03T11:00:09.634+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task check_kafka_health (Kafka health check failed: [Errno -3] Temporary failure in name resolution; 198)
+[2026-04-03T11:00:09.667+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-04-03T11:00:09.680+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,20 @@
+[2026-04-03T22:25:02.846+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509
+[2026-04-03T22:25:02.847+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion'
+[2026-04-03T22:25:02.868+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509
+[2026-04-03T22:25:02.868+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion'
+[2026-04-03T22:25:02.893+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_pipeline.validate_bronze_ingestion scheduled__2026-04-03T22:20:00+00:00 [queued]>
+[2026-04-03T22:25:02.898+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_pipeline.validate_bronze_ingestion scheduled__2026-04-03T22:20:00+00:00 [queued]>
+[2026-04-03T22:25:02.898+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-04-03T22:25:02.904+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): validate_bronze_ingestion> on 2026-04-03 22:20:00+00:00
+[2026-04-03T22:25:02.907+0000] {standard_task_runner.py:60} INFO - Started process 299 to run task
+[2026-04-03T22:25:02.909+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'crypto_pipeline', 'validate_bronze_ingestion', 'scheduled__2026-04-03T22:20:00+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpafn3ecpd']
+[2026-04-03T22:25:02.910+0000] {standard_task_runner.py:88} INFO - Job 23: Subtask validate_bronze_ingestion
+[2026-04-03T22:25:02.937+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509
+[2026-04-03T22:25:02.938+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=validate_bronze_ingestion'
+[2026-04-03T22:25:02.944+0000] {task_command.py:423} INFO - Running <TaskInstance: crypto_pipeline.validate_bronze_ingestion scheduled__2026-04-03T22:20:00+00:00 [running]> on host 2fe6c9a0f22c
+[2026-04-03T22:25:02.986+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='crypto-pipeline' AIRFLOW_CTX_DAG_ID='crypto_pipeline' AIRFLOW_CTX_TASK_ID='validate_bronze_ingestion' AIRFLOW_CTX_EXECUTION_DATE='2026-04-03T22:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-03T22:20:00+00:00'
+[2026-04-03T22:25:02.990+0000] {crypto_pipeline.py:99} INFO - ✅ Bronze validation passed — 24913 new rows in last 10 minutes
+[2026-04-03T22:25:02.998+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-04-03T22:25:03.003+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=crypto_pipeline, task_id=validate_bronze_ingestion, execution_date=20260403T222000, start_date=20260403T222502, end_date=20260403T222503
+[2026-04-03T22:25:03.048+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-04-03T22:25:03.066+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

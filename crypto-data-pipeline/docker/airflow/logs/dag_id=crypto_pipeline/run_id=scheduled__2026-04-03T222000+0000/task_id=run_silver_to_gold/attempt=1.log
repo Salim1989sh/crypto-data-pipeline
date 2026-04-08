@@ -1,0 +1,20 @@
+[2026-04-03T22:25:05.465+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509
+[2026-04-03T22:25:05.465+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold'
+[2026-04-03T22:25:05.486+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509
+[2026-04-03T22:25:05.486+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold'
+[2026-04-03T22:25:05.513+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_pipeline.run_silver_to_gold scheduled__2026-04-03T22:20:00+00:00 [queued]>
+[2026-04-03T22:25:05.518+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_pipeline.run_silver_to_gold scheduled__2026-04-03T22:20:00+00:00 [queued]>
+[2026-04-03T22:25:05.518+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-04-03T22:25:05.525+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_silver_to_gold> on 2026-04-03 22:20:00+00:00
+[2026-04-03T22:25:05.528+0000] {standard_task_runner.py:60} INFO - Started process 305 to run task
+[2026-04-03T22:25:05.530+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'crypto_pipeline', 'run_silver_to_gold', 'scheduled__2026-04-03T22:20:00+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpykwl5apm']
+[2026-04-03T22:25:05.531+0000] {standard_task_runner.py:88} INFO - Job 26: Subtask run_silver_to_gold
+[2026-04-03T22:25:05.564+0000] {logging_mixin.py:188} INFO - Changing /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509
+[2026-04-03T22:25:05.564+0000] {logging_mixin.py:188} INFO - Failed to change /opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold permission to 509: [Errno 1] Operation not permitted: '/opt/airflow/logs/dag_id=crypto_pipeline/run_id=scheduled__2026-04-03T22:20:00+00:00/task_id=run_silver_to_gold'
+[2026-04-03T22:25:05.578+0000] {task_command.py:423} INFO - Running <TaskInstance: crypto_pipeline.run_silver_to_gold scheduled__2026-04-03T22:20:00+00:00 [running]> on host 2fe6c9a0f22c
+[2026-04-03T22:25:05.629+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='crypto-pipeline' AIRFLOW_CTX_DAG_ID='crypto_pipeline' AIRFLOW_CTX_TASK_ID='run_silver_to_gold' AIRFLOW_CTX_EXECUTION_DATE='2026-04-03T22:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-03T22:20:00+00:00'
+[2026-04-03T22:25:05.679+0000] {crypto_pipeline.py:275} INFO - 🥇 Gold: all tables refreshed successfully
+[2026-04-03T22:25:05.680+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-04-03T22:25:05.686+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=crypto_pipeline, task_id=run_silver_to_gold, execution_date=20260403T222000, start_date=20260403T222505, end_date=20260403T222505
+[2026-04-03T22:25:05.714+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-04-03T22:25:05.731+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

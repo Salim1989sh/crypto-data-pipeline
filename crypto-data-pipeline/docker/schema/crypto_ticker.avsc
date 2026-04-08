@@ -1,0 +1,24 @@
+{
+  "type": "record",
+  "name": "CryptoTicker",
+  "namespace": "com.crypto.pipeline",
+  "fields": [
+    {"name": "symbol",             "type": "string"},
+    {"name": "priceChange",        "type": ["null", "string"], "default": null},
+    {"name": "priceChangePercent", "type": ["null", "string"], "default": null},
+    {"name": "weightedAvgPrice",   "type": ["null", "string"], "default": null},
+    {"name": "prevClosePrice",     "type": ["null", "string"], "default": null},
+    {"name": "lastPrice",          "type": "string"},
+    {"name": "lastQty",            "type": ["null", "string"], "default": null},
+    {"name": "bidPrice",           "type": ["null", "string"], "default": null},
+    {"name": "askPrice",           "type": ["null", "string"], "default": null},
+    {"name": "openPrice",          "type": ["null", "string"], "default": null},
+    {"name": "highPrice",          "type": ["null", "string"], "default": null},
+    {"name": "lowPrice",           "type": ["null", "string"], "default": null},
+    {"name": "volume",             "type": "string"},
+    {"name": "quoteVolume",        "type": ["null", "string"], "default": null},
+    {"name": "openTime",           "type": ["null", "long"],   "default": null},
+    {"name": "closeTime",          "type": ["null", "long"],   "default": null},
+    {"name": "count",              "type": ["null", "long"],   "default": null}
+  ]
+}

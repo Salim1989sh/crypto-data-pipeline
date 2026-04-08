@@ -1,0 +1,33 @@
+  # ── Add this block to your docker-compose.yml after the transformer service ──
+
+  spark:
+    build: ./spark
+    container_name: spark
+    depends_on:
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_TOPIC: crypto-ticker
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: crypto_db
+      POSTGRES_USER: crypto_user
+      POSTGRES_PASSWORD: crypto_pass
+      TRIGGER_INTERVAL: "30 seconds"
+      CHECKPOINT_DIR: /tmp/spark-checkpoints
+      SPARK_MODE: master
+    volumes:
+      - spark_checkpoints:/tmp/spark-checkpoints
+    networks:
+      - crypto-net
+    restart: unless-stopped
+
+  # ── Also add spark_checkpoints to the volumes section at the bottom ──
+  # volumes:
+  #   postgres_data:
+  #   grafana_data:
+  #   airflow_plugins:
+  #   spark_checkpoints:    ← add this line
