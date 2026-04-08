@@ -23,7 +23,7 @@ jobs:
 
     - name: Build and run services
       run: |
-        docker-compose -f docker/docker-compose.yml up --build -d
+        docker-compose -f docker-compose.yml up --build -d
 
     - name: Check running containers
       run: docker ps
